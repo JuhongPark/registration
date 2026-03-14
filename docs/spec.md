@@ -8,39 +8,39 @@ The goal of this assignment is to build a simple command-line user registration 
 
 ### Requirements
 
-- Programming Language: Python
-- Database: MySQL (to be run within a Docker container via GitHub CodeSpaces)
-- Tools & Libraries:
+- **Programming Language:** Python
+- **Database:** MySQL (to be run within a Docker container via GitHub CodeSpaces)
+- **Tools & Libraries:**
   - GitHub CodeSpaces (using the default blank template)
   - Docker (for running a MySQL container)
   - Python packages:
-    - mysql-connector-python (for database connectivity)
-    - PyYAML (to read connection credentials from a YAML file)
-    - Faker (to generate synthetic user data)
-    - rich (for an enhanced command-line UI using panels)
-- Files to Create:
-  - db.yaml
-  - db_connection.py
-  - create_database_and_table.py
-  - create_user.py
-  - read_users.py
-  - update_user.py
-  - delete_user.py
-  - populate_users.py
-  - cli_menu.py
-  - main.py
+    - `mysql-connector-python` (for database connectivity)
+    - `PyYAML` (to read connection credentials from a YAML file)
+    - `Faker` (to generate synthetic user data)
+    - `rich` (for an enhanced command-line UI using panels)
+- **Files to Create:**
+  - `db.yaml`
+  - `db_connection.py`
+  - `create_database_and_table.py`
+  - `create_user.py`
+  - `read_users.py`
+  - `update_user.py`
+  - `delete_user.py`
+  - `populate_users.py`
+  - `cli_menu.py`
+  - `main.py`
 
 ### Assignment Description
 
-Your application will manage user registration using a single MySQL database that contains one table named users. The system must support all CRUD operations and provide a menu-driven interface for user interaction. Complete the following questions:
+Your application will manage user registration using a single MySQL database that contains one table named **users**. The system must support all CRUD operations and provide a menu-driven interface for user interaction. Complete the following questions:
 
 ### Question 1: Database Connection (db_connection.py)
 
 **Description:**
 Write Python code to establish a connection to the MySQL database.
 
-- Task:
-  - Load the database credentials (host, user, password, port) from a db.yaml file.
+- **Task:**
+  - Load the database credentials (host, user, password, port) from a `db.yaml` file.
   - Connect to the MySQL server and display a confirmation message once the connection is successfully established.
 
 ### Question 2: Creating the Database and Table (create_database_and_table.py)
@@ -48,23 +48,23 @@ Write Python code to establish a connection to the MySQL database.
 **Description:**
 Create the database and the table required for the assignment.
 
-- Task:
-  - Write Python code to create a database (e.g., users_db) if it does not already exist.
-  - Create a table named users with the following fields:
-    - id: A unique identifier (Primary Key, Auto-Incremented)
-    - username: The user's chosen username (Unique, Required)
-    - email: The user's email address (Unique, Required)
-    - password: The user's password
-    - city: The city where the user is located
-    - company: The name of the company the user is associated with
-    - job_title: The user's job title representing their role in the company
+- **Task:**
+  - Write Python code to create a database (e.g., `users_db`) if it does not already exist.
+  - Create a table named **users** with the following fields:
+    - `id`: A unique identifier (Primary Key, Auto-Incremented)
+    - `username`: The user's chosen username (Unique, Required)
+    - `email`: The user's email address (Unique, Required)
+    - `password`: The user's password
+    - `city`: The city where the user is located
+    - `company`: The name of the company the user is associated with
+    - `job_title`: The user's job title representing their role in the company
 
 ### Question 3: Creating Users (create_user.py)
 
 **Description:**
-Write Python code to insert a new user into the users table.
+Write Python code to insert a new user into the **users** table.
 
-- Task:
+- **Task:**
   - Accept input for username, email, password, city, company, and job title.
   - Validate the inputs and securely hash the password before storing it.
   - Insert the new user record into the database.
@@ -74,8 +74,8 @@ Write Python code to insert a new user into the users table.
 **Description:**
 Write Python code to retrieve and display all user records from the database.
 
-- Task:
-  - Query the users table.
+- **Task:**
+  - Query the **users** table.
   - Display the results in a clear and formatted manner on the command line.
 
 ### Question 5: Updating User Information (update_user.py)
@@ -83,7 +83,7 @@ Write Python code to retrieve and display all user records from the database.
 **Description:**
 Write Python code to update an existing user's email or password.
 
-- Task:
+- **Task:**
   - Allow the user to specify which field (email or password) to update.
   - Validate and perform the update, then confirm the change to the user.
 
@@ -92,9 +92,9 @@ Write Python code to update an existing user's email or password.
 **Description:**
 Write Python code to remove a user from the database based on their username.
 
-- Task:
+- **Task:**
   - Accept the username as input.
-  - Delete the corresponding record from the users table.
+  - Delete the corresponding record from the **users** table.
   - Handle cases where the specified user does not exist.
 
 ### Question 7: Populating the Database (populate_users.py)
@@ -102,15 +102,15 @@ Write Python code to remove a user from the database based on their username.
 **Description:**
 Utilize the Faker package to generate synthetic user data.
 
-- Task:
+- **Task:**
   - Generate and insert 1,000 synthetic users
 
 ### Question 8: Command-Line Interface (cli_menu.py)
 
 **Description:**
-Develop a command-line menu using the rich library (e.g., rich.panel) for enhanced UI.
+Develop a command-line menu using the `rich` library (e.g., `rich.panel`) for enhanced UI.
 
-- Task:
+- **Task:**
   - Implement a menu that offers options to:
     - Create a new user
     - Read/display one user
@@ -125,13 +125,13 @@ Develop a command-line menu using the rich library (e.g., rich.panel) for enhanc
 **Description:**
 Integrate all previously implemented functionalities into a single executable script.
 
-- Task:
-  - Use main.py as the entry point to coordinate interactions between the modules.
+- **Task:**
+  - Use `main.py` as the entry point to coordinate interactions between the modules.
   - Ensure smooth integration and proper error handling across the application.
 
 ### Additional Guidelines
 
-- Documentation:
+- **Documentation:**
   - Comment your code thoroughly to explain your logic and key sections.
 
 ## Source
