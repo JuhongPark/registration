@@ -55,6 +55,11 @@ def update_user():
     cursor = connection.cursor()
 
     try:
+        # Use whitelisted field names to prevent SQL injection
+        allowed_fields = {"email", "password"}
+        if field not in allowed_fields:
+            print("Invalid field.")
+            return
         update_query = f"UPDATE users SET {field} = %s WHERE username = %s"
         cursor.execute(update_query, (new_value, username))
         connection.commit()
