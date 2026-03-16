@@ -6,6 +6,7 @@ Validates the new value and confirms the change.
 """
 
 import hashlib
+import mysql.connector
 from db_connection import connect_to_database_with_db
 
 
@@ -70,8 +71,11 @@ def update_user():
         else:
             print(f"User '{username}' {field} updated successfully.")
 
-    except Exception as e:
-        print(f"Error updating user: {e}")
+    except mysql.connector.IntegrityError:
+        # Handle duplicate email when updating
+        print(f"Error: The email '{new_value}' is already in use by another user.")
+    except mysql.connector.Error as e:
+        print(f"Database error while updating user: {e}")
     finally:
         cursor.close()
         connection.close()

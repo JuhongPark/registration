@@ -5,6 +5,7 @@ Removes a user from the database based on their username.
 Handles cases where the specified user does not exist.
 """
 
+import mysql.connector
 from db_connection import connect_to_database_with_db
 
 
@@ -33,8 +34,8 @@ def delete_user():
         else:
             print(f"User '{username}' has been deleted successfully.")
 
-    except Exception as e:
-        print(f"Error deleting user: {e}")
+    except mysql.connector.Error as e:
+        print(f"Database error while deleting user: {e}")
     finally:
         cursor.close()
         connection.close()

@@ -5,6 +5,7 @@ Queries the users table and displays results in a clear
 and formatted manner on the command line.
 """
 
+import mysql.connector
 from db_connection import connect_to_database_with_db
 
 
@@ -31,8 +32,8 @@ def read_all_users():
         print(f"\nTotal users: {len(rows)}")
         return rows
 
-    except Exception as e:
-        print(f"Error reading users: {e}")
+    except mysql.connector.Error as e:
+        print(f"Database error while reading users: {e}")
         return []
     finally:
         cursor.close()
@@ -65,8 +66,8 @@ def read_one_user(username):
         print(f"Job Title: {row[5]}")
         return row
 
-    except Exception as e:
-        print(f"Error reading user: {e}")
+    except mysql.connector.Error as e:
+        print(f"Database error while reading user: {e}")
         return None
     finally:
         cursor.close()

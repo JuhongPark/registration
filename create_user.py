@@ -6,6 +6,7 @@ securely hashes the password, and inserts the new user into the database.
 """
 
 import hashlib
+import mysql.connector
 from db_connection import connect_to_database_with_db
 
 
@@ -63,8 +64,11 @@ def create_user():
         cursor.execute(insert_query, (username, email, hashed_password, city, company, job_title))
         connection.commit()
         print(f"User '{username}' created successfully.")
-    except Exception as e:
-        print(f"Error creating user: {e}")
+    except mysql.connector.IntegrityError:
+        # Handle duplicate username or email
+        print(f"Error: Username '{username}' or email '{email}' already exists.")
+    except mysql.connector.Error as e:
+        print(f"Database error while creating user: {e}")
     finally:
         cursor.close()
         connection.close()
