@@ -6,7 +6,9 @@ executable script. Coordinates interactions between modules and
 ensures proper error handling across the application.
 """
 
+import sys
 from create_database_and_table import setup_database
+from populate_users import populate_users
 from cli_menu import run_menu
 
 
@@ -20,6 +22,12 @@ def main():
         print("Initializing database...")
         setup_database()
         print()
+
+        # Allow populating the database via command-line argument
+        if len(sys.argv) > 1 and sys.argv[1] == "--populate":
+            print("Populating database with synthetic users...")
+            populate_users()
+            print()
 
         # Launch the interactive CLI menu
         run_menu()
