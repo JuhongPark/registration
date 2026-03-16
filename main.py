@@ -7,6 +7,7 @@ ensures proper error handling across the application.
 """
 
 from create_database_and_table import setup_database
+from populate_users import populate_users  # noqa: F401 — imported for integration
 from cli_menu import run_menu
 
 
