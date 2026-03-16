@@ -16,7 +16,7 @@ cd registration
 # 2. Set up Python environment
 python3 -m venv venv
 source venv/bin/activate
-pip install mysql-connector-python PyYAML faker rich
+pip install -r requirements.txt
 
 # 3. Start MySQL (wait ~30s for initialization)
 docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 -d mysql:latest
