@@ -9,13 +9,14 @@ import mysql.connector
 from db_connection import connect_to_database
 
 
-def create_database(cursor):
+def create_database(cursor, verbose=True):
     """Create the 'users_db' database if it does not already exist."""
     cursor.execute("CREATE DATABASE IF NOT EXISTS users_db")
-    print("Database 'users_db' is ready.")
+    if verbose:
+        print("Database 'users_db' is ready.")
 
 
-def create_users_table(cursor):
+def create_users_table(cursor, verbose=True):
     """
     Create the 'users' table with the following fields:
     - id: Primary Key, Auto-Incremented
@@ -40,19 +41,21 @@ def create_users_table(cursor):
     )
     """
     cursor.execute(create_table_query)
-    print("Table 'users' is ready.")
+    if verbose:
+        print("Table 'users' is ready.")
 
 
-def setup_database():
+def setup_database(verbose=True):
     """Run the full database setup: create database and table."""
-    connection = connect_to_database()
+    connection = connect_to_database(verbose=verbose)
     cursor = connection.cursor()
 
     try:
-        create_database(cursor)
-        create_users_table(cursor)
+        create_database(cursor, verbose=verbose)
+        create_users_table(cursor, verbose=verbose)
         connection.commit()
-        print("Database setup complete.")
+        if verbose:
+            print("Database setup complete.")
     except mysql.connector.Error as e:
         print(f"Error during database setup: {e}")
     finally:

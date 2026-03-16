@@ -17,6 +17,23 @@ from delete_user import delete_user
 console = Console()
 
 
+def display_welcome():
+    """Display the course info and welcome banner on application startup."""
+    course_info = (
+        "[bold]1.001: Engineering Computation and Data Science[/bold]\n"
+        "Instructors: Abel Sanchez and John R. Williams"
+    )
+    console.print(Panel(course_info, border_style="bright_blue"))
+
+    welcome_text = (
+        "[bold]Command-Line User Registration System[/bold]\n"
+        "Manage users with full CRUD operations, synthetic data generation,\n"
+        "and an interactive menu interface."
+    )
+    console.print(Panel(welcome_text, border_style="green"))
+    console.print()
+
+
 def display_menu():
     """Display the main menu using rich panel for enhanced UI."""
     menu_text = (
@@ -35,6 +52,9 @@ def run_menu():
     Run the main menu loop. Handles user input and routes
     to the correct operation based on the selected option.
     """
+    # Show welcome banner once on startup
+    display_welcome()
+
     while True:
         display_menu()
         choice = input("\nEnter your choice (1-6): ").strip()

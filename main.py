@@ -17,12 +17,10 @@ def main():
     then launches the interactive CLI menu.
     """
     try:
-        # Initialize the database and table before starting the menu
-        print("Initializing database...")
-        setup_database()
-        print()
+        # Initialize the database and table silently before showing the menu
+        setup_database(verbose=False)
 
-        # Launch the interactive CLI menu
+        # Launch the interactive CLI menu (shows welcome banner first)
         run_menu()
 
     except KeyboardInterrupt:
