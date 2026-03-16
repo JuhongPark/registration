@@ -56,6 +56,12 @@ def update_user():
     cursor = connection.cursor()
 
     try:
+        # First check if the user exists
+        cursor.execute("SELECT COUNT(*) FROM users WHERE username = %s", (username,))
+        if cursor.fetchone()[0] == 0:
+            print(f"User '{username}' not found. No changes made.")
+            return
+
         # Use whitelisted field names to prevent SQL injection
         allowed_fields = {"email", "password"}
         if field not in allowed_fields:
@@ -65,11 +71,7 @@ def update_user():
         cursor.execute(update_query, (new_value, username))
         connection.commit()
 
-        # Check if the user was found and updated
-        if cursor.rowcount == 0:
-            print(f"User '{username}' not found. No changes made.")
-        else:
-            print(f"User '{username}' {field} updated successfully.")
+        print(f"User '{username}' {field} updated successfully.")
 
     except mysql.connector.IntegrityError:
         # Handle duplicate email when updating
