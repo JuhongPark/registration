@@ -57,14 +57,6 @@ python main.py
 
 This will automatically create the database and table, then launch the interactive menu.
 
-### Run with synthetic data population
-
-```bash
-python main.py --populate
-```
-
-This generates and inserts 1,000 synthetic users before launching the menu.
-
 ### Run individual modules
 
 Each module can also be executed independently:
