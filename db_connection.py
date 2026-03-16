@@ -34,10 +34,11 @@ def get_db_config():
     return config["mysql"]
 
 
-def connect_to_database():
+def connect_to_database(verbose=True):
     """
     Connect to the MySQL server using credentials from db.yaml.
-    Returns the connection object and displays a confirmation message.
+    Returns the connection object. Displays a confirmation message
+    when verbose is True (default for standalone use).
     """
     config = get_db_config()
 
@@ -54,14 +55,16 @@ def connect_to_database():
         sys.exit(1)
 
     # Display confirmation message once connected
-    print("Successfully connected to the MySQL database.")
+    if verbose:
+        print("Successfully connected to the MySQL database.")
     return connection
 
 
-def connect_to_database_with_db(database="users_db"):
+def connect_to_database_with_db(database="users_db", verbose=False):
     """
     Connect to a specific MySQL database.
     Used by CRUD modules that need direct access to users_db.
+    Verbose is False by default to keep CRUD output clean.
     """
     config = get_db_config()
 
@@ -77,11 +80,12 @@ def connect_to_database_with_db(database="users_db"):
         print(f"Error: Could not connect to '{database}' — {e}")
         sys.exit(1)
 
-    print(f"Successfully connected to the '{database}' database.")
+    if verbose:
+        print(f"Successfully connected to the '{database}' database.")
     return connection
 
 
-# Run connection test when executed directly
+# Run connection test when executed directly — displays confirmation per Q1 spec
 if __name__ == "__main__":
     conn = connect_to_database()
     conn.close()
