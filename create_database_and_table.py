@@ -5,6 +5,7 @@ Creates the 'users_db' database if it does not already exist,
 then creates the 'users' table with the required fields.
 """
 
+import mysql.connector
 from db_connection import connect_to_database
 
 
@@ -47,14 +48,16 @@ def setup_database():
     connection = connect_to_database()
     cursor = connection.cursor()
 
-    create_database(cursor)
-    create_users_table(cursor)
-
-    # Commit changes and clean up
-    connection.commit()
-    cursor.close()
-    connection.close()
-    print("Database setup complete.")
+    try:
+        create_database(cursor)
+        create_users_table(cursor)
+        connection.commit()
+        print("Database setup complete.")
+    except mysql.connector.Error as e:
+        print(f"Error during database setup: {e}")
+    finally:
+        cursor.close()
+        connection.close()
 
 
 # Run setup when executed directly
