@@ -1,0 +1,8 @@
+# MySQL database connection credentials
+# Update these values to match your MySQL server configuration
+
+mysql:
+  host: "localhost"
+  user: "root"
+  password: "root"
+  port: 3306
