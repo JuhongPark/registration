@@ -56,7 +56,7 @@ registration/
 └── main.py                      # Entry point integrating all modules (Q9)
 ```
 
-## What Was Added Beyond the Base Requirements
+## Additional Enhancements
 
 - **Hidden password input** — Uses `getpass` to hide password characters during creation and update
 - **Delete confirmation** — Prompts "Are you sure?" before deleting a user to prevent accidental removal
