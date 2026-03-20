@@ -63,7 +63,11 @@ registration/
 ## What Was Added Beyond the Base Requirements
 
 - **Password hashing** — All passwords are stored as SHA-256 hashes, never in plain text
+- **Hidden password input** — Uses `getpass` to hide password characters during creation and update
 - **Input validation** — Empty fields, invalid emails, and duplicate usernames/emails are caught with clear error messages
+- **Delete confirmation** — Prompts "Are you sure?" before deleting a user to prevent accidental removal
+- **Partial username search** — User lookup supports partial matching via SQL `LIKE`, showing a table when multiple users match
+- **Pagination** — `read_all_users` displays results in pages of 20, with navigation to avoid overwhelming output
 - **Rich table output** — User listings use `rich.Table` for clean, readable formatting
 - **Robust error handling** — Specific MySQL exceptions (e.g., `IntegrityError`) produce user-friendly messages instead of raw tracebacks
 - **Batch insert** — `populate_users.py` uses `executemany()` for efficient bulk insertion
