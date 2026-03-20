@@ -74,34 +74,52 @@ def read_all_users(page_size=20):
 
 
 def read_one_user(username):
-    """Retrieve and display a single user record by username."""
+    """Retrieve and display user records by username, supporting partial match with LIKE."""
     connection = connect_to_database_with_db()
     cursor = connection.cursor()
 
     try:
-        # Query a single user by username using parameterized query
+        # Use LIKE with wildcards to allow partial username matching
         cursor.execute(
-            "SELECT id, username, email, city, company, job_title FROM users WHERE username = %s",
-            (username,)
+            "SELECT id, username, email, city, company, job_title FROM users WHERE username LIKE %s",
+            (f"%{username}%",)
         )
-        row = cursor.fetchone()
+        rows = cursor.fetchall()
 
         # Handle case where no matching user is found
-        if not row:
-            console.print(f"User '{username}' not found.")
+        if not rows:
+            console.print(f"No users matching '{username}' found.")
             return None
 
-        # Format the user record as a rich Panel for single-record display
-        details = (
-            f"[cyan]ID:[/cyan]        {row[0]}\n"
-            f"[green]Username:[/green]  {row[1]}\n"
-            f"[yellow]Email:[/yellow]     {row[2]}\n"
-            f"City:      {row[3]}\n"
-            f"Company:   {row[4]}\n"
-            f"Job Title: {row[5]}"
-        )
-        console.print(Panel(details, title="User Details", border_style="cyan"))
-        return row
+        # If exactly one match, display as a detailed panel
+        if len(rows) == 1:
+            row = rows[0]
+            details = (
+                f"[cyan]ID:[/cyan]        {row[0]}\n"
+                f"[green]Username:[/green]  {row[1]}\n"
+                f"[yellow]Email:[/yellow]     {row[2]}\n"
+                f"City:      {row[3]}\n"
+                f"Company:   {row[4]}\n"
+                f"Job Title: {row[5]}"
+            )
+            console.print(Panel(details, title="User Details", border_style="cyan"))
+            return rows[0]
+
+        # If multiple matches, display all in a table
+        console.print(f"Found {len(rows)} users matching '{username}':")
+        table = Table(title="Search Results")
+        table.add_column("ID", style="cyan")
+        table.add_column("Username", style="green")
+        table.add_column("Email", style="yellow")
+        table.add_column("City")
+        table.add_column("Company")
+        table.add_column("Job Title")
+
+        for row in rows:
+            table.add_row(str(row[0]), row[1], row[2], row[3], row[4], row[5])
+
+        console.print(table)
+        return rows
 
     except mysql.connector.Error as e:
         print(f"Database error while reading user: {e}")
