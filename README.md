@@ -51,20 +51,6 @@ The app automatically creates the database and table on first run.
 | **Delete a user** | Remove a user by username with confirmation |
 | **Populate 1,000 users** | Generate synthetic users using Faker |
 
-## Database Schema
-
-The application uses a single `users` table in the `users_db` database:
-
-| Column | Type | Constraints |
-|--------|------|-------------|
-| `id` | INT | Primary Key, Auto-Increment |
-| `username` | VARCHAR(255) | Unique, Not Null |
-| `email` | VARCHAR(255) | Unique, Not Null |
-| `password` | VARCHAR(255) | SHA-256 hashed |
-| `city` | VARCHAR(255) | |
-| `company` | VARCHAR(255) | |
-| `job_title` | VARCHAR(255) | |
-
 ## Project Structure
 
 ```
