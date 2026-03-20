@@ -40,6 +40,31 @@ The app automatically creates the database and table on first run.
 
 > **Note:** If your MySQL credentials differ from the defaults (`root`/`root`/`3306`), edit `db.yaml` before running.
 
+## Features
+
+| Menu Option | Description |
+|-------------|-------------|
+| **Create a new user** | Register a user with username, email, password, city, company, and job title |
+| **Read/display one user** | Look up a user by full or partial username |
+| **Read/display all users** | View all users in a paginated table (20 per page) |
+| **Update an existing user** | Update a user's email or password |
+| **Delete a user** | Remove a user by username with confirmation |
+| **Populate 1,000 users** | Generate synthetic users using Faker |
+
+## Database Schema
+
+The application uses a single `users` table in the `users_db` database:
+
+| Column | Type | Constraints |
+|--------|------|-------------|
+| `id` | INT | Primary Key, Auto-Increment |
+| `username` | VARCHAR(255) | Unique, Not Null |
+| `email` | VARCHAR(255) | Unique, Not Null |
+| `password` | VARCHAR(255) | SHA-256 hashed |
+| `city` | VARCHAR(255) | |
+| `company` | VARCHAR(255) | |
+| `job_title` | VARCHAR(255) | |
+
 ## Project Structure
 
 ```
