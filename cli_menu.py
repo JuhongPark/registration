@@ -12,6 +12,7 @@ from create_user import create_user
 from read_users import read_all_users, read_one_user
 from update_user import update_user
 from delete_user import delete_user
+from populate_users import populate_users
 
 # Initialize rich console for enhanced output
 console = Console()
@@ -42,7 +43,8 @@ def display_menu():
         "[bold cyan]3.[/bold cyan] Read/display all users\n"
         "[bold cyan]4.[/bold cyan] Update an existing user\n"
         "[bold cyan]5.[/bold cyan] Delete a user\n"
-        "[bold cyan]6.[/bold cyan] Exit"
+        "[bold cyan]6.[/bold cyan] Populate 1,000 synthetic users\n"
+        "[bold cyan]7.[/bold cyan] Exit"
     )
     console.print(Panel(menu_text, title="User Registration System", border_style="cyan"))
 
@@ -57,7 +59,7 @@ def run_menu():
 
     while True:
         display_menu()
-        choice = input("\nEnter your choice (1-6): ").strip()
+        choice = input("\nEnter your choice (1-7): ").strip()
 
         if choice == "1":
             # Create a new user
@@ -81,13 +83,17 @@ def run_menu():
             delete_user()
 
         elif choice == "6":
+            # Generate and insert 1,000 synthetic users using Faker
+            populate_users()
+
+        elif choice == "7":
             # Exit the application
             console.print("[bold green]Goodbye![/bold green]")
             break
 
         else:
             # Handle invalid input gracefully
-            console.print("[bold red]Invalid choice. Please enter a number between 1 and 6.[/bold red]")
+            console.print("[bold red]Invalid choice. Please enter a number between 1 and 7.[/bold red]")
 
 
 # Run the menu when executed directly
