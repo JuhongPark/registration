@@ -5,6 +5,7 @@ Allows the user to update an existing user's email or password.
 Validates the new value and confirms the change.
 """
 
+import getpass
 import hashlib
 import mysql.connector
 from db_connection import connect_to_database_with_db
@@ -39,7 +40,8 @@ def update_user():
         new_value = new_email
 
     elif choice == "2":
-        new_password = input("Enter the new password: ")
+        # Use getpass to hide password input from the terminal
+        new_password = getpass.getpass("Enter the new password: ")
         if not new_password.strip():
             print("Password cannot be empty.")
             return

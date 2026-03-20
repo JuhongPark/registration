@@ -5,6 +5,7 @@ Accepts input for user details, validates inputs,
 securely hashes the password, and inserts the new user into the database.
 """
 
+import getpass
 import hashlib
 import mysql.connector
 from db_connection import connect_to_database_with_db
@@ -38,7 +39,8 @@ def create_user():
     print("\n--- Create New User ---")
     username = input("Enter username: ")
     email = input("Enter email: ")
-    password = input("Enter password: ")
+    # Use getpass to hide password input from the terminal
+    password = getpass.getpass("Enter password: ")
     city = input("Enter city: ")
     company = input("Enter company: ")
     job_title = input("Enter job title: ")
