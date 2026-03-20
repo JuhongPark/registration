@@ -45,10 +45,10 @@ The app automatically creates the database and table on first run.
 | Menu Option | Description |
 |-------------|-------------|
 | **Create a new user** | Register a user with username, email, password, city, company, and job title |
-| **Read/display one user** | Look up a user by full or partial username |
-| **Read/display all users** | View all users in a paginated table (20 per page) |
+| **Read/display one user** | Search and display a user by username |
+| **Read/display all users** | View all registered users in a formatted table |
 | **Update an existing user** | Update a user's email or password |
-| **Delete a user** | Remove a user by username with confirmation |
+| **Delete a user** | Remove a user by username |
 | **Populate 1,000 users** | Generate synthetic users using Faker |
 
 ## Project Structure
