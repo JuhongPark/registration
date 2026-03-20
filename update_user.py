@@ -6,14 +6,9 @@ Validates the new value and confirms the change.
 """
 
 import getpass
-import hashlib
 import mysql.connector
 from db_connection import connect_to_database_with_db
-
-
-def hash_password(password):
-    """Securely hash the password using SHA-256."""
-    return hashlib.sha256(password.encode()).hexdigest()
+from create_user import hash_password  # Reuse hashing logic implemented in Q3
 
 
 def update_user():

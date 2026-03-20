@@ -5,15 +5,10 @@ Uses the Faker package to generate and insert 1,000 synthetic
 users into the database.
 """
 
-import hashlib
 import mysql.connector
 from faker import Faker
 from db_connection import connect_to_database_with_db
-
-
-def hash_password(password):
-    """Securely hash the password using SHA-256."""
-    return hashlib.sha256(password.encode()).hexdigest()
+from create_user import hash_password  # Reuse hashing logic implemented in Q3
 
 
 def populate_users(count=1000):
