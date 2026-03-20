@@ -56,51 +56,6 @@ registration/
 └── main.py                      # Entry point integrating all modules (Q9)
 ```
 
-## Implementation Details (Q1–Q9)
-
-### Q1: Database Connection (`db_connection.py`)
-Loads database credentials (host, user, password, port) from `db.yaml` using PyYAML. Connects to the MySQL server and displays a confirmation message on success.
-
-### Q2: Creating the Database and Table (`create_database_and_table.py`)
-Creates the `users_db` database if it does not already exist, then creates the `users` table with the following fields:
-- `id` — Primary Key, Auto-Incremented
-- `username` — Unique, Required
-- `email` — Unique, Required
-- `password` — Stores the hashed password
-- `city` — User's city
-- `company` — User's company name
-- `job_title` — User's job title
-
-### Q3: Creating Users (`create_user.py`)
-Accepts input for username, email, password, city, company, and job title. Validates inputs (empty fields, email format) and securely hashes the password using SHA-256 before inserting into the database.
-
-### Q4: Reading Users (`read_users.py`)
-Queries the `users` table and displays results in a clear and formatted manner using `rich.Table`. Supports both viewing all users and looking up a single user.
-
-### Q5: Updating User Information (`update_user.py`)
-Allows the user to specify which field to update (email or password). Validates the new value, performs the update, and confirms the change.
-
-### Q6: Deleting a User (`delete_user.py`)
-Accepts a username as input, deletes the corresponding record from the `users` table, and handles cases where the specified user does not exist.
-
-### Q7: Populating the Database (`populate_users.py`)
-Uses the Faker package to generate and insert 1,000 synthetic users into the database. Uses `executemany()` for efficient batch insertion.
-
-### Q8: Command-Line Interface (`cli_menu.py`)
-A menu-driven interface built with `rich.Panel` that offers options to:
-1. Create a new user
-2. Read/display one user
-3. Read/display all users
-4. Update an existing user
-5. Delete a user
-6. Populate 1,000 synthetic users
-7. Exit the application
-
-Handles user inputs gracefully and routes them to the correct operations.
-
-### Q9: Integrating All Functionalities (`main.py`)
-Entry point that coordinates all modules. Runs database setup on startup, then launches the interactive CLI menu. Includes top-level error handling for smooth operation.
-
 ## What Was Added Beyond the Base Requirements
 
 - **Password hashing** — All passwords are stored as SHA-256 hashes, never in plain text
