@@ -21,6 +21,12 @@ def delete_user():
         print("Username cannot be empty.")
         return
 
+    # Ask for confirmation before performing the irreversible delete
+    confirm = input(f"Are you sure you want to delete '{username}'? (y/n): ").strip().lower()
+    if confirm != "y":
+        print("Deletion cancelled.")
+        return
+
     connection = connect_to_database_with_db()
     cursor = connection.cursor()
 
