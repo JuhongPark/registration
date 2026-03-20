@@ -2,7 +2,7 @@
 Command-Line Interface Module (Q8)
 
 Develops a command-line menu using the rich library for enhanced UI.
-Provides options to create, read, update, delete users, and exit.
+Provides options to create, read, update, delete, populate users, and exit.
 """
 
 from rich.console import Console

@@ -21,6 +21,7 @@ def get_db_config():
     config_path = os.path.join(script_dir, "db.yaml")
 
     try:
+        # Read and parse the YAML configuration file using safe_load
         with open(config_path, "r") as file:
             config = yaml.safe_load(file)
     except FileNotFoundError:
@@ -31,6 +32,7 @@ def get_db_config():
         print(f"Error: Failed to parse db.yaml — {e}")
         sys.exit(1)
 
+    # Return only the 'mysql' section containing host, user, password, port
     return config["mysql"]
 
 

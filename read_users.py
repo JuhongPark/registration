@@ -21,6 +21,7 @@ def read_all_users():
     cursor = connection.cursor()
 
     try:
+        # Query all user records, excluding password hash from display
         cursor.execute("SELECT id, username, email, city, company, job_title FROM users")
         rows = cursor.fetchall()
 
@@ -28,7 +29,7 @@ def read_all_users():
             console.print("No users found in the database.")
             return []
 
-        # Display results in a formatted rich table
+        # Build a rich Table with styled columns for clear, formatted output
         table = Table(title="All Users")
         table.add_column("ID", style="cyan")
         table.add_column("Username", style="green")
@@ -37,10 +38,12 @@ def read_all_users():
         table.add_column("Company")
         table.add_column("Job Title")
 
+        # Populate each row, converting id from int to str for display
         for row in rows:
             table.add_row(str(row[0]), row[1], row[2], row[3], row[4], row[5])
 
         console.print(table)
+        # Show total count below the table for quick reference
         console.print(f"\nTotal users: {len(rows)}")
         return rows
 
@@ -58,17 +61,19 @@ def read_one_user(username):
     cursor = connection.cursor()
 
     try:
+        # Query a single user by username using parameterized query
         cursor.execute(
             "SELECT id, username, email, city, company, job_title FROM users WHERE username = %s",
             (username,)
         )
         row = cursor.fetchone()
 
+        # Handle case where no matching user is found
         if not row:
             console.print(f"User '{username}' not found.")
             return None
 
-        # Display the user record in a rich panel
+        # Format the user record as a rich Panel for single-record display
         details = (
             f"[cyan]ID:[/cyan]        {row[0]}\n"
             f"[green]Username:[/green]  {row[1]}\n"
