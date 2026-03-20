@@ -21,17 +21,17 @@ def populate_users(count=1000):
     connection = connect_to_database_with_db()
     cursor = connection.cursor()
 
+    # Use INSERT IGNORE to skip duplicates gracefully on repeated runs
     insert_query = """
-    INSERT INTO users (username, email, password, city, company, job_title)
+    INSERT IGNORE INTO users (username, email, password, city, company, job_title)
     VALUES (%s, %s, %s, %s, %s, %s)
     """
 
-    # Build a list of tuples, each representing one synthetic user record
+    # Build a list of tuples using fake.unique to generate distinct values
     batch = []
-    for i in range(count):
-        # Append index to username and email to guarantee uniqueness across runs
-        username = f"{fake.user_name()}_{i}"
-        email = f"{i}_{fake.email()}"
+    for _ in range(count):
+        username = fake.unique.user_name()
+        email = fake.unique.email()
         # Hash each generated password before storing, same as manual user creation
         password = hash_password(fake.password())
         city = fake.city()
@@ -43,7 +43,11 @@ def populate_users(count=1000):
     try:
         cursor.executemany(insert_query, batch)
         connection.commit()
-        print(f"Successfully inserted {cursor.rowcount} synthetic users.")
+        inserted = cursor.rowcount
+        skipped = count - inserted
+        print(f"Successfully inserted {inserted} synthetic users.")
+        if skipped > 0:
+            print(f"Skipped {skipped} duplicates.")
     except mysql.connector.Error as e:
         print(f"Error populating users: {e}")
         connection.rollback()
