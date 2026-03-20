@@ -34,14 +34,12 @@ docker start mysql-container
 
 # 4. Run the application
 python main.py
+
+# 5. (Optional) Populate the database with 1,000 synthetic users
+python populate_users.py
 ```
 
 The app automatically creates the database and table on first run.
-
-To populate the database with 1,000 synthetic users (Q7), run separately:
-```bash
-python populate_users.py
-```
 
 > **Note:** If your MySQL credentials differ from the defaults, edit `db.yaml` before running:
 > ```yaml
