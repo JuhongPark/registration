@@ -38,7 +38,14 @@ python main.py
 
 The app automatically creates the database and table on first run.
 
-> **Note:** If your MySQL credentials differ from the defaults (`root`/`root`/`3306`), edit `db.yaml` before running.
+> **Note:** If your MySQL credentials differ from the defaults, edit `db.yaml` before running:
+> ```yaml
+> mysql:
+>   host: "localhost"
+>   user: "root"
+>   password: "root"
+>   port: 3306
+> ```
 
 ## Features
 
@@ -50,6 +57,7 @@ The app automatically creates the database and table on first run.
 | **Update an existing user** | Update a user's email or password |
 | **Delete a user** | Remove a user by username |
 | **Populate 1,000 users** | Generate synthetic users using Faker |
+| **Exit** | Quit the application |
 
 ## Project Structure
 

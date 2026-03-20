@@ -31,13 +31,13 @@ def create_users_table(cursor, verbose=True):
 
     create_table_query = """
     CREATE TABLE IF NOT EXISTS users (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        username VARCHAR(255) NOT NULL UNIQUE,
-        email VARCHAR(255) NOT NULL UNIQUE,
-        password VARCHAR(255),
-        city VARCHAR(255),
-        company VARCHAR(255),
-        job_title VARCHAR(255)
+        id INT AUTO_INCREMENT PRIMARY KEY,   -- Unique identifier, auto-incremented
+        username VARCHAR(255) NOT NULL UNIQUE,-- User's chosen username (required, unique)
+        email VARCHAR(255) NOT NULL UNIQUE,  -- User's email address (required, unique)
+        password VARCHAR(255),               -- Hashed password (SHA-256)
+        city VARCHAR(255),                   -- City where the user is located
+        company VARCHAR(255),                -- Company the user is associated with
+        job_title VARCHAR(255)               -- User's job title / role in the company
     )
     """
     cursor.execute(create_table_query)

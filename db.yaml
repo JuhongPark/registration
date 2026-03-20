@@ -2,7 +2,7 @@
 # Update these values to match your MySQL server configuration
 
 mysql:
-  host: "localhost"
-  user: "root"
-  password: "root"
-  port: 3306
+  host: "localhost"       # MySQL server hostname
+  user: "root"            # Database username
+  password: "root"        # Database password
+  port: 3306              # MySQL server port
