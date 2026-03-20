@@ -18,8 +18,11 @@ python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 
-# 3. Start MySQL (wait ~30s for initialization)
+# 3. Start MySQL
+# First time:
 docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 -d mysql:latest
+# Already created before? Just restart it:
+docker start mysql-container
 
 # 4. Run the application
 python main.py
