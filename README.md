@@ -38,6 +38,11 @@ python main.py
 
 The app automatically creates the database and table on first run.
 
+To populate the database with 1,000 synthetic users (Q7), run separately:
+```bash
+python populate_users.py
+```
+
 > **Note:** If your MySQL credentials differ from the defaults, edit `db.yaml` before running:
 > ```yaml
 > mysql:
@@ -56,7 +61,6 @@ The app automatically creates the database and table on first run.
 | **Read/display all users** | View all registered users in a formatted table |
 | **Update an existing user** | Update a user's email or password |
 | **Delete a user** | Remove a user by username |
-| **Populate 1,000 users** | Generate synthetic users using Faker |
 | **Exit** | Quit the application |
 
 ## Project Structure

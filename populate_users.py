@@ -3,6 +3,10 @@ Populate Users Module (Q7)
 
 Uses the Faker package to generate and insert 1,000 synthetic
 users into the database.
+
+Usage:
+    Run this script directly to populate the database:
+        python populate_users.py
 """
 
 import mysql.connector
