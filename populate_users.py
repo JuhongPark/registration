@@ -31,19 +31,20 @@ def populate_users(count=1000):
     VALUES (%s, %s, %s, %s, %s, %s)
     """
 
-    # Generate all user data in a batch
+    # Build a list of tuples, each representing one synthetic user record
     batch = []
     for i in range(count):
-        # Generate unique username and email by appending index to avoid duplicates
+        # Append index to username and email to guarantee uniqueness across runs
         username = f"{fake.user_name()}_{i}"
         email = f"{i}_{fake.email()}"
+        # Hash each generated password before storing, same as manual user creation
         password = hash_password(fake.password())
         city = fake.city()
         company = fake.company()
         job_title = fake.job()
         batch.append((username, email, password, city, company, job_title))
 
-    # Insert all records in a single batch operation
+    # Use executemany() to insert all records in one operation for efficiency
     try:
         cursor.executemany(insert_query, batch)
         connection.commit()

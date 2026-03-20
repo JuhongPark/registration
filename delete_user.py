@@ -25,10 +25,11 @@ def delete_user():
     cursor = connection.cursor()
 
     try:
+        # Execute DELETE and check rowcount to determine if the user existed
         cursor.execute("DELETE FROM users WHERE username = %s", (username,))
         connection.commit()
 
-        # Handle cases where the user does not exist
+        # rowcount == 0 means no matching row was found for the given username
         if cursor.rowcount == 0:
             print(f"User '{username}' not found. No records deleted.")
         else:

@@ -62,11 +62,12 @@ def update_user():
             print(f"User '{username}' not found. No changes made.")
             return
 
-        # Use whitelisted field names to prevent SQL injection
+        # Only allow known field names in the query to prevent SQL injection
         allowed_fields = {"email", "password"}
         if field not in allowed_fields:
             print("Invalid field.")
             return
+        # Build UPDATE query with the validated field name and parameterized value
         update_query = f"UPDATE users SET {field} = %s WHERE username = %s"
         cursor.execute(update_query, (new_value, username))
         connection.commit()

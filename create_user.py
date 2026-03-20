@@ -52,11 +52,12 @@ def create_user():
     # Securely hash the password before storing
     hashed_password = hash_password(password)
 
-    # Insert the new user record into the database
+    # Connect to users_db and insert the new user record
     connection = connect_to_database_with_db()
     cursor = connection.cursor()
 
     try:
+        # Use parameterized query to safely insert user data and prevent SQL injection
         insert_query = """
         INSERT INTO users (username, email, password, city, company, job_title)
         VALUES (%s, %s, %s, %s, %s, %s)
