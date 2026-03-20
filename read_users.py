@@ -15,8 +15,8 @@ from db_connection import connect_to_database_with_db
 console = Console()
 
 
-def read_all_users():
-    """Retrieve and display all user records from the users table."""
+def read_all_users(page_size=20):
+    """Retrieve and display all user records with pagination."""
     connection = connect_to_database_with_db()
     cursor = connection.cursor()
 
@@ -29,22 +29,40 @@ def read_all_users():
             console.print("No users found in the database.")
             return []
 
-        # Build a rich Table with styled columns for clear, formatted output
-        table = Table(title="All Users")
-        table.add_column("ID", style="cyan")
-        table.add_column("Username", style="green")
-        table.add_column("Email", style="yellow")
-        table.add_column("City")
-        table.add_column("Company")
-        table.add_column("Job Title")
+        total = len(rows)
+        # Calculate total number of pages
+        total_pages = (total + page_size - 1) // page_size
+        page = 0
 
-        # Populate each row, converting id from int to str for display
-        for row in rows:
-            table.add_row(str(row[0]), row[1], row[2], row[3], row[4], row[5])
+        while page < total_pages:
+            # Slice the current page of rows
+            start = page * page_size
+            end = min(start + page_size, total)
+            page_rows = rows[start:end]
 
-        console.print(table)
-        # Show total count below the table for quick reference
-        console.print(f"\nTotal users: {len(rows)}")
+            # Build a rich Table with styled columns for clear, formatted output
+            table = Table(title=f"All Users (Page {page + 1}/{total_pages})")
+            table.add_column("ID", style="cyan")
+            table.add_column("Username", style="green")
+            table.add_column("Email", style="yellow")
+            table.add_column("City")
+            table.add_column("Company")
+            table.add_column("Job Title")
+
+            # Populate each row, converting id from int to str for display
+            for row in page_rows:
+                table.add_row(str(row[0]), row[1], row[2], row[3], row[4], row[5])
+
+            console.print(table)
+            console.print(f"Showing {start + 1}-{end} of {total} users")
+
+            # If there are more pages, prompt the user to continue or quit
+            if page < total_pages - 1:
+                nav = input("\nPress Enter for next page, or 'q' to quit: ").strip().lower()
+                if nav == "q":
+                    break
+            page += 1
+
         return rows
 
     except mysql.connector.Error as e:
